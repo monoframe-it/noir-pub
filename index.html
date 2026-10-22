@@ -1,1 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIR PUB - Good Drinks. Great Nights.</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        noir: '#111111',
+                        burgundy: '#721C32',
+                        cream: '#F5F0EA',
+                        gold: '#C5A46D',
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #111111;
+            color: #F5F0EA;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-delay-200 {
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+
+        .animate-delay-400 {
+            animation-delay: 0.4s;
+            opacity: 0;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(114, 28, 50, 0.3);
+        }
+
+        .btn-primary {
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(114, 28, 50, 0.4);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #C5A46D;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .input-field {
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #C5A46D;
+            box-shadow: 0 0 0 3px rgba(197, 164, 109, 0.1);
+        }
+
+        .category-btn {
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover {
+            background-color: #721C32;
+            color: #F5F0EA;
+        }
+
+        .category-btn.active {
+            background-color: #721C32;
+            color: #F5F0EA;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #111111;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #721C32;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C5A46D;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Navigation Component
+        const Navigation = ({ onReserveClick }) => {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+            const navLinks = [
+                { href: '#home', label: 'Home' },
+                { href: '#menu', label: 'Menu' },
+                { href: '#about', label: 'About' },
+                { href: '#contact', label: 'Contact' },
+            ];
+
+            return (
+                <nav className="fixed top-0 left-0 right-0 z-50 bg-noir/95 backdrop-blur-sm border-b border-burgundy/20">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex justify-between items-center h-20">
+                            <div className="flex-shrink-0">
+                                <a href="#home" className="font-display text-2xl font-bold text-cream tracking-wider">
+                                    NOIR PUB
+                                </a>
+                            </div>
+
+                            <div className="hidden md:flex items-center space-x-8">
+                                {navLinks.map((link) => (
+                                    <a
+                                        key={link.href}
+                                        href={link.href}
+                                        className="nav-link text-cream/80 hover:text-gold font-medium"
+                                    >
+                                        {link.label}
+                                    </a>
+                                ))}
+                                <button
+                                    onClick={onReserveClick}
+                                    className="btn-primary bg-burgundy text-cream px-6 py-2 rounded font-medium hover:bg-burgundy/90"
+                                >
+                                    Reserve a Table
+                                </button>
+                            </div>
+
+                            <div className="md:hidden">
+                                <button
+                                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                    className="text-cream p-2"
+                                    aria-label="Toggle menu"
+                                >
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        {isMenuOpen ? (
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        ) : (
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                        )}
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        {isMenuOpen && (
+                            <div className="md:hidden pb-4">
+                                {navLinks.map((link) => (
+                                    <a
+                                        key={link.href}
+                                        href={link.href}
+                                        onClick={() => setIsMenuOpen(false)}
+                                        className="block py-2 text-cream/80 hover:text-gold font-medium"
+                                    >
+                                        {link.label}
+                                    </a>
+                                ))}
+                                <button
+                                    onClick={() => {
+                                        onReserveClick();
+                                        setIsMenuOpen(false);
+                                    }}
+                                    className="mt-4 w-full bg-burgundy text-cream px-6 py-2 rounded font-medium hover:bg-burgundy/90"
+                                >
+                                    Reserve a Table
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </nav>
+            );
+        };
+
+        // Hero Section
+        const HeroSection = ({ onReserveClick }) => {
+            return (
+                <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-noir via-noir/95 to-burgundy/20"></div>
+                    <div className="absolute inset-0 opacity-20">
+                        <div className="absolute inset-0" style={{
+                            backgroundImage: 'radial-gradient(circle at 20% 50%, #721C32 0%, transparent 50%), radial-gradient(circle at 80% 80%, #C5A46D 0%, transparent 50%)',
+                        }}></div>
+                    </div>
+                    
+                    <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+                        <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-cream mb-6 animate-fadeInUp">
+                            GOOD DRINKS.<br />GREAT NIGHTS.
+                        </h1>
+                        <p className="text-xl sm:text-2xl text-cream/80 mb-12 animate-fadeInUp animate-delay-200">
+                            Craft cocktails, bold flavors, and unforgettable evenings.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fadeInUp animate-delay-400">
+                            <a
+                                href="#menu"
+                                className="btn-primary bg-burgundy text-cream px-8 py-4 rounded font-medium hover:bg-burgundy/90 text-lg"
+                            >
+                                Explore Our Menu
+                            </a>
+                            <button
+                                onClick={onReserveClick}
+                                className="btn-primary border-2 border-gold text-gold px-8 py-4 rounded font-medium hover:bg-gold hover:text-noir text-lg"
+                            >
+                                Reserve a Table
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Menu Section
+        const MenuSection = () => {
+            const [activeCategory, setActiveCategory] = useState('cocktails');
+
+            const categories = [
+                { id: 'cocktails', label: 'Cocktails' },
+                { id: 'beer', label: 'Beer' },
+                { id: 'wine', label: 'Wine' },
+                { id: 'food', label: 'Food' },
+            ];
+
+            const menuItems = [
+                {
+                    id: 1,
+                    category: 'cocktails',
+                    name: 'Espresso Martini',
+                    description: 'Rich espresso, vodka, and coffee liqueur',
+                    price: '4500 AMD',
+                    image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=400&fit=crop'
+                },
+                {
+                    id: 2,
+                    category: 'cocktails',
+                    name: 'Old Fashioned',
+                    description: 'Bourbon, sugar, and aromatic bitters',
+                    price: '4200 AMD',
+                    image: 'https://images.unsplash.com/photo-1470338745628-171cf53de4a8?w=400&h=400&fit=crop'
+                },
+                {
+                    id: 3,
+                    category: 'cocktails',
+                    name: 'Aperol Spritz',
+                    description: 'Aperol, prosecco, and soda water',
+                    price: '3800 AMD',
+                    image: 'https://images.unsplash.com/photo-1560512823-829485b8bf24?w=400&h=400&fit=crop'
+                },
+                {
+                    id: 4,
+                    category: 'cocktails',
+                    name: 'Mojito',
+                    description: 'White rum, fresh mint, lime, and soda',
+                    price: '3900 AMD',
+                    image: 'https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=400&h=400&fit=crop'
+                },
+                {
+                    id: 5,
+                    category: 'beer',
+                    name: 'Craft Beer',
+                    description: 'Local artisanal brew, rotating selection',
+                    price: '2800 AMD',
+                    image: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=400&h=400&fit=crop'
+                },
+                {
+                    id: 6,
+                    category: 'wine',
+                    name: 'House Red Wine',
+                    description: 'Smooth blend from Armenian vineyards',
+                    price: '3200 AMD',
+                    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&h=400&fit=crop'
+                },
+                {
+                    id: 7,
+                    category: 'food',
+                    name: 'Classic Burger',
+                    description: 'Angus beef, cheddar, lettuce, tomato, fries',
+                    price: '5500 AMD',
+                    image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=400&fit=crop'
+                },
+                {
+                    id: 8,
+                    category: 'food',
+                    name: 'Truffle Fries',
+                    description: 'Crispy fries with truffle oil and parmesan',
+                    price: '3200 AMD',
+                    image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=400&fit=crop'
+                },
+            ];
+
+            const filteredItems = menuItems.filter(item => item.category === activeCategory);
+
+            return (
+                <section id="menu" className="py-20 px-4 sm:px-6 lg:px-8 bg-noir">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-16">
+                            <h2 className="font-display text-4xl sm:text-5xl font-bold text-cream mb-4">
+                                OUR MENU
+                            </h2>
+                            <p className="text-cream/70 text-lg">
+                                Discover our carefully curated selection
+                            </p>
+                        </div>
+
+                        <div className="flex flex-wrap justify-center gap-4 mb-12">
+                            {categories.map((category) => (
+                                <button
+                                    key={category.id}
+                                    onClick={() => setActiveCategory(category.id)}
+                                    className={`category-btn px-6 py-3 rounded font-medium ${
+                                        activeCategory === category.id
+                                            ? 'active'
+                                            : 'bg-noir border border-gold/30 text-gold'
+                                    }`}
+                                >
+                                    {category.label}
+                                </button>
+                            ))}
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {filteredItems.map((item) => (
+                                <div
+                                    key={item.id}
+                                    className="menu-card bg-noir border border-burgundy/20 rounded-lg overflow-hidden transition-all duration-300"
+                                >
+                                    <div className="h-48 bg-gradient-to-br from-burgundy/30 to-noir flex items-center justify-center">
+                                        <div className="text-6xl">
+                                            {item.category === 'cocktails' && '🍸'}
+                                            {item.category === 'beer' && '🍺'}
+                                            {item.category === 'wine' && '🍷'}
+                                            {item.category === 'food' && '🍔'}
+                                        </div>
+                                    </div>
+                                    <div className="p-6">
+                                        <h3 className="font-display text-xl font-semibold text-cream mb-2">
+                                            {item.name}
+                                        </h3>
+                                        <p className="text-cream/70 text-sm mb-4">
+                                            {item.description}
+                                        </p>
+                                        <p className="text-gold font-semibold text-lg">
+                                            {item.price}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // About Section
+        const AboutSection = () => {
+            return (
+                <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-noir to-burgundy/10">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="grid md:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <h2 className="font-display text-4xl sm:text-5xl font-bold text-cream mb-6">
+                                    MORE THAN JUST A PUB
+                                </h2>
+                                <p className="text-cream/80 text-lg mb-6 leading-relaxed">
+                                    At NOIR PUB, we believe in creating moments that matter. Our carefully crafted cocktails, 
+                                    curated music selections, and intimate atmosphere come together to create an experience 
+                                    that goes beyond just drinks.
+                                </p>
+                                <p className="text-cream/80 text-lg mb-6 leading-relaxed">
+                                    Whether you're celebrating with friends, enjoying a quiet evening, or discovering new 
+                                    flavors, our dedicated team ensures every visit is memorable. We've built a space where 
+                                    great conversations flow as freely as our signature drinks.
+                                </p>
+                                <p className="text-cream/80 text-lg leading-relaxed">
+                                    From the moment you step through our doors, you'll feel the difference. This is your 
+                                    place to unwind, connect, and create stories worth telling.
+                                </p>
+                            </div>
+                            <div className="relative">
+                                <div className="aspect-square bg-gradient-to-br from-burgundy/40 to-gold/20 rounded-lg flex items-center justify-center">
+                                    <div className="text-center p-8">
+                                        <div className="text-8xl mb-4">🍻</div>
+                                        <p className="text-cream/90 font-display text-2xl">Where Moments Are Made</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Specials Section
+        const SpecialsSection = () => {
+            const specials = [
+                {
+                    id: 1,
+                    name: 'NOIR Signature',
+                    description: 'Our house special blend of premium spirits, dark chocolate, and a hint of espresso. A true masterpiece.',
+                    price: '5800 AMD',
+                    icon: '✨'
+                },
+                {
+                    id: 2,
+                    name: 'Golden Hour',
+                    description: 'Aged whiskey, honey syrup, and aromatic bitters. Smooth, complex, and unforgettable.',
+                    price: '5200 AMD',
+                    icon: '🥃'
+                },
+                {
+                    id: 3,
+                    name: 'Midnight Bloom',
+                    description: 'Gin, elderflower liqueur, fresh berries, and a splash of prosecco. Elegant and refreshing.',
+                    price: '4900 AMD',
+                    icon: '🌸'
+                },
+            ];
+
+            return (
+                <section className="py-20 px-4 sm:px-6 lg:px-8 bg-noir">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-16">
+                            <h2 className="font-display text-4xl sm:text-5xl font-bold text-cream mb-4">
+                                SIGNATURE SPECIALS
+                            </h2>
+                            <p className="text-cream/70 text-lg">
+                                Exclusive creations from our master mixologists
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-8">
+                            {specials.map((special) => (
+                                <div
+                                    key={special.id}
+                                    className="bg-gradient-to-br from-burgundy/20 to-noir border border-gold/30 rounded-lg p-8 text-center hover:border-gold/60 transition-all duration-300"
+                                >
+                                    <div className="text-6xl mb-6">{special.icon}</div>
+                                    <h3 className="font-display text-2xl font-semibold text-gold mb-4">
+                                        {special.name}
+                                    </h3>
+                                    <p className="text-cream/80 mb-6 leading-relaxed">
+                                        {special.description}
+                                    </p>
+                                    <p className="text-gold font-semibold text-xl">
+                                        {special.price}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Reservation Section
+        const ReservationSection = () => {
+            const [formData, setFormData] = useState({
+                name: '',
+                phone: '',
+                date: '',
+                time: '',
+                guests: '',
+            });
+            const [reservations, setReservations] = useState([]);
+            const [showSuccess, setShowSuccess] = useState(false);
+            const [editingId, setEditingId] = useState(null);
+            const [errors, setErrors] = useState({});
+
+            useEffect(() => {
+                const saved = localStorage.getItem('noirPubReservations');
+                if (saved) {
+                    setReservations(JSON.parse(saved));
+                }
+            }, []);
+
+            useEffect(() => {
+                if (reservations.length > 0) {
+                    localStorage.setItem('noirPubReservations', JSON.stringify(reservations));
+                }
+            }, [reservations]);
+
+            const validateForm = () => {
+                const newErrors = {};
+                
+                if (!formData.name.trim()) {
+                    newErrors.name = 'Name is required';
+                }
+                
+                if (!formData.phone.trim()) {
+                    newErrors.phone = 'Phone number is required';
+                } else if (!/^\+?[\d\s-()]+$/.test(formData.phone)) {
+                    newErrors.phone = 'Please enter a valid phone number';
+                }
+                
+                if (!formData.date) {
+                    newErrors.date = 'Date is required';
+                } else {
+                    const selectedDate = new Date(formData.date);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    if (selectedDate < today) {
+                        newErrors.date = 'Cannot select a past date';
+                    }
+                }
+                
+                if (!formData.time) {
+                    newErrors.time = 'Time is required';
+                }
+                
+                if (!formData.guests) {
+                    newErrors.guests = 'Number of guests is required';
+                } else if (parseInt(formData.guests) < 1 || parseInt(formData.guests) > 20) {
+                    newErrors.guests = 'Guests must be between 1 and 20';
+                }
+                
+                setErrors(newErrors);
+                return Object.keys(newErrors).length === 0;
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                
+                if (!validateForm()) {
+                    return;
+                }
+
+                if (editingId) {
+                    setReservations(reservations.map(res => 
+                        res.id === editingId 
+                            ? { ...res, ...formData }
+                            : res
+                    ));
+                    setEditingId(null);
+                } else {
+                    const newReservation = {
+                        id: Date.now().toString(),
+                        ...formData,
+                        createdAt: new Date().toISOString(),
+                    };
+                    setReservations([...reservations, newReservation]);
+                }
+
+                setFormData({
+                    name: '',
+                    phone: '',
+                    date: '',
+                    time: '',
+                    guests: '',
+                });
+                setErrors({});
+                setShowSuccess(true);
+                setTimeout(() => setShowSuccess(false), 5000);
+            };
+
+            const handleEdit = (reservation) => {
+                setFormData({
+                    name: reservation.name,
+                    phone: reservation.phone,
+                    date: reservation.date,
+                    time: reservation.time,
+                    guests: reservation.guests,
+                });
+                setEditingId(reservation.id);
+                document.getElementById('reservation').scrollIntoView({ behavior: 'smooth' });
+            };
+
+            const handleDelete = (id) => {
+                if (window.confirm('Are you sure you want to delete this reservation?')) {
+                    setReservations(reservations.filter(res => res.id !== id));
+                    if (editingId === id) {
+                        setEditingId(null);
+                        setFormData({
+                            name: '',
+                            phone: '',
+                            date: '',
+                            time: '',
+                            guests: '',
+                        });
+                    }
+                }
+            };
+
+            const handleChange = (e) => {
+                const { name, value } = e.target;
+                setFormData(prev => ({ ...prev, [name]: value }));
+                if (errors[name]) {
+                    setErrors(prev => ({ ...prev, [name]: '' }));
+                }
+            };
+
+            const getMinDate = () => {
+                const today = new Date();
+                return today.toISOString().split('T')[0];
+            };
+
+            return (
+                <section id="reservation" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-burgundy/10 to-noir">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="text-center mb-12">
+                            <h2 className="font-display text-4xl sm:text-5xl font-bold text-cream mb-4">
+                                RESERVE A TABLE
+                            </h2>
+                            <p className="text-cream/70 text-lg">
+                                Book your experience at NOIR PUB
+                            </p>
+                        </div>
+
+                        {showSuccess && (
+                            <div className="mb-8 bg-gold/20 border border-gold rounded-lg p-6 text-center">
+                                <p className="text-gold font-semibold text-lg mb-2">
+                                    {editingId ? 'Reservation Updated Successfully!' : 'Reservation Submitted Successfully!'}
+                                </p>
+                                <p className="text-cream/80">
+                                    This is a demo reservation. No actual booking has been made.
+                                </p>
+                            </div>
+                        )}
+
+                        <form onSubmit={handleSubmit} className="bg-noir/50 border border-burgundy/30 rounded-lg p-8">
+                            <div className="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label htmlFor="name" className="block text-cream mb-2 font-medium">
+                                        Full Name *
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        className="input-field w-full bg-noir border border-burgundy/30 rounded px-4 py-3 text-cream"
+                                        placeholder="John Doe"
+                                    />
+                                    {errors.name && (
+                                        <p className="text-red-400 text-sm mt-1">{errors.name}</p>
+                                    )}
+                                </div>
+
+                                <div>
+                                    <label htmlFor="phone" className="block text-cream mb-2 font-medium">
+                                        Phone Number *
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        className="input-field w-full bg-noir border border-burgundy/30 rounded px-4 py-3 text-cream"
+                                        placeholder="+374 XX XXX XXX"
+                                    />
+                                    {errors.phone && (
+                                        <p className="text-red-400 text-sm mt-1">{errors.phone}</p>
+                                    )}
+                                </div>
+
+                                <div>
+                                    <label htmlFor="date" className="block text-cream mb-2 font-medium">
+                                        Date *
+                                    </label>
+                                    <input
+                                        type="date"
+                                        id="date"
+                                        name="date"
+                                        value={formData.date}
+                                        onChange={handleChange}
+                                        min={getMinDate()}
+                                        className="input-field w-full bg-noir border border-burgundy/30 rounded px-4 py-3 text-cream"
+                                    />
+                                    {errors.date && (
+                                        <p className="text-red-400 text-sm mt-1">{errors.date}</p>
+                                    )}
+                                </div>
+
+                                <div>
+                                    <label htmlFor="time" className="block text-cream mb-2 font-medium">
+                                        Time *
+                                    </label>
+                                    <input
+                                        type="time"
+                                        id="time"
+                                        name="time"
+                                        value={formData.time}
+                                        onChange={handleChange}
+                                        className="input-field w-full bg-noir border border-burgundy/30 rounded px-4 py-3 text-cream"
+                                    />
+                                    {errors.time && (
+                                        <p className="text-red-400 text-sm mt-1">{errors.time}</p>
+                                    )}
+                                </div>
+
+                                <div className="md:col-span-2">
+                                    <label htmlFor="guests" className="block text-cream mb-2 font-medium">
+                                        Number of Guests *
+                                    </label>
+                                    <input
+                                        type="number"
+                                        id="guests"
+                                        name="guests"
+                                        value={formData.guests}
+                                        onChange={handleChange}
+                                        min="1"
+                                        max="20"
+                                        className="input-field w-full bg-noir border border-burgundy/30 rounded px-4 py-3 text-cream"
+                                        placeholder="2"
+                                    />
+                                    {errors.guests && (
+                                        <p className="text-red-400 text-sm mt-1">{errors.guests}</p>
+                                    )}
+                                </div>
+                            </div>
+
+                            <button
+                                type="submit"
+                                className="btn-primary w-full bg-burgundy text-cream py-4 rounded font-medium hover:bg-burgundy/90 text-lg"
+                            >
+                                {editingId ? 'Update Reservation' : 'Submit Reservation'}
+                            </button>
+
+                            {editingId && (
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setEditingId(null);
+                                        setFormData({
+                                            name: '',
+                                            phone: '',
+                                            date: '',
+                                            time: '',
+                                            guests: '',
+                                        });
+                                        setErrors({});
+                                    }}
+                                    className="w-full mt-4 bg-noir border border-gold text-gold py-3 rounded font-medium hover:bg-gold hover:text-noir transition-all"
+                                >
+                                    Cancel Edit
+                                </button>
+                            )}
+                        </form>
+
+                        {reservations.length > 0 && (
+                            <div className="mt-12">
+                                <h3 className="font-display text-2xl font-semibold text-cream mb-6">
+                                    Your Reservations
+                                </h3>
+                                <div className="space-y-4">
+                                    {reservations.map((reservation) => (
+                                        <div
+                                            key={reservation.id}
+                                            className="bg-noir/50 border border-burgundy/20 rounded-lg p-6"
+                                        >
+                                            <div className="flex flex-wrap justify-between items-start gap-4">
+                                                <div className="flex-1">
+                                                    <h4 className="text-gold font-semibold text-lg mb-2">
+                                                        {reservation.name}
+                                                    </h4>
+                                                    <div className="grid sm:grid-cols-2 gap-2 text-cream/80">
+                                                        <p>📞 {reservation.phone}</p>
+                                                        <p>📅 {new Date(reservation.date).toLocaleDateString()}</p>
+                                                        <p>🕐 {reservation.time}</p>
+                                                        <p>👥 {reservation.guests} guest{reservation.guests > 1 ? 's' : ''}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-2">
+                                                    <button
+                                                        onClick={() => handleEdit(reservation)}
+                                                        className="px-4 py-2 bg-gold/20 border border-gold text-gold rounded hover:bg-gold hover:text-noir transition-all"
+                                                    >
+                                                        Edit
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleDelete(reservation.id)}
+                                                        className="px-4 py-2 bg-burgundy/20 border border-burgundy text-cream rounded hover:bg-burgundy transition-all"
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </section>
+            );
+        };
+
+        // Contact Section
+        const ContactSection = () => {
+            return (
+                <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-noir border-t border-burgundy/20">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="grid md:grid-cols-3 gap-12 mb-12">
+                            <div>
+                                <h3 className="font-display text-2xl font-semibold text-gold mb-4">
+                                    VISIT US
+                                </h3>
+                                <p className="text-cream/80 leading-relaxed">
+                                    123 Abovyan Street<br />
+                                    Yerevan, Armenia<br />
+                                    0001
+                                </p>
+                                <p className="text-cream/60 text-sm mt-2">
+                                    (Sample address for demo purposes)
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3 className="font-display text-2xl font-semibold text-gold mb-4">
+                                    OPENING HOURS
+                                </h3>
+                                <div className="text-cream/80 space-y-2">
+                                    <p>Monday - Thursday: 5:00 PM - 1:00 AM</p>
+                                    <p>Friday - Saturday: 5:00 PM - 3:00 AM</p>
+                                    <p>Sunday: 6:00 PM - 12:00 AM</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 className="font-display text-2xl font-semibold text-gold mb-4">
+                                    CONTACT
+                                </h3>
+                                <div className="text-cream/80 space-y-2">
+                                    <p>Phone: +374 10 123 456</p>
+                                    <p>Email: info@noirpub.am</p>
+                                    <a
+                                        href="https://instagram.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-block mt-2 text-gold hover:text-cream transition-colors"
+                                    >
+                                        @noirpub.yerevan
+                                    </a>
+                                </div>
+                                <p className="text-cream/60 text-sm mt-2">
+                                    (Sample contact info for demo)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Footer
+        const Footer = () => {
+            return (
+                <footer className="py-8 px-4 sm:px-6 lg:px-8 bg-noir border-t border-burgundy/20">
+                    <div className="max-w-7xl mx-auto text-center">
+                        <p className="font-display text-2xl font-bold text-cream mb-4">
+                            NOIR PUB
+                        </p>
+                        <p className="text-cream/60 text-sm">
+                            © 2024 NOIR PUB. All rights reserved. This is a demo website.
+                        </p>
+                    </div>
+                </footer>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            const scrollToReservation = () => {
+                document.getElementById('reservation').scrollIntoView({ behavior: 'smooth' });
+            };
+
+            return (
+                <div className="min-h-screen bg-noir">
+                    <Navigation onReserveClick={scrollToReservation} />
+                    <HeroSection onReserveClick={scrollToReservation} />
+                    <MenuSection />
+                    <AboutSection />
+                    <SpecialsSection />
+                    <ReservationSection />
+                    <ContactSection />
+                    <Footer />
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
 
