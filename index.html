@@ -112,6 +112,7 @@
                 { href: '#home', label: 'Home' },
                 { href: '#menu', label: 'Menu' },
                 { href: '#about', label: 'About' },
+                { href: '#gallery', label: 'Interior' },
                 { href: '#specials', label: 'Specials' },
                 { href: '#contact', label: 'Contact' },
             ];
@@ -245,7 +246,7 @@
                         {/* Stats Bar */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-8 border-t border-white/10 max-w-3xl mx-auto">
                             <div>
-                                <p className="font-display text-3xl font-bold text-accent">40+</p>
+                                <p className="font-display text-3xl font-bold text-accent">50+</p>
                                 <p className="text-[10px] uppercase tracking-widest text-cream/50 mt-1">Drinks & Food</p>
                             </div>
                             <div>
@@ -286,20 +287,34 @@
                 { id: 4, category: 'cocktails', name: 'Classic Mojito', description: 'White rum, fresh mint, lime, sparkling water', price: '$13.00', image: 'https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=600&auto=format&fit=crop&q=80' },
                 { id: 5, category: 'cocktails', name: 'Smoky Mezcal Paloma', description: 'Mezcal, fresh grapefruit juice, lime, sea salt rim', price: '$15.00', image: 'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=600&auto=format&fit=crop&q=80' },
                 { id: 6, category: 'cocktails', name: 'Classic Negroni', description: 'Dry gin, Campari, Sweet Vermouth, orange peel', price: '$14.50', image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&auto=format&fit=crop&q=80' },
+                { id: 7, category: 'cocktails', name: 'Whiskey Sour', description: 'Bourbon, fresh lemon juice, egg white foam, Angostura', price: '$13.50', image: 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=600&auto=format&fit=crop&q=80' },
+                { id: 8, category: 'cocktails', name: 'Berry Gin Tonic', description: 'Botanical gin, artisanal tonic, fresh blackberries, rosemary', price: '$12.50', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600&auto=format&fit=crop&q=80' },
 
                 // Beer
-                { id: 7, category: 'beer', name: 'Hazy IPA', description: 'Citra hops, tropical fruit notes, smooth finish', price: '$8.50', image: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600&auto=format&fit=crop&q=80' },
-                { id: 8, category: 'beer', name: 'Belgian Dark Ale', description: 'Caramel malt sweetness, dried fruit, subtle spice', price: '$9.00', image: 'https://images.unsplash.com/photo-1608270586620-248524c67de9?w=600&auto=format&fit=crop&q=80' },
-                { id: 9, category: 'beer', name: 'Imperial Stout', description: 'Dark roasted cacao, espresso notes, oak finish', price: '$10.00', image: 'https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=600&auto=format&fit=crop&q=80' },
+                { id: 9, category: 'beer', name: 'Hazy IPA', description: 'Citra hops, tropical fruit notes, smooth finish', price: '$8.50', image: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600&auto=format&fit=crop&q=80' },
+                { id: 10, category: 'beer', name: 'Belgian Dark Ale', description: 'Caramel malt sweetness, dried fruit, subtle spice', price: '$9.00', image: 'https://images.unsplash.com/photo-1608270586620-248524c67de9?w=600&auto=format&fit=crop&q=80' },
+                { id: 11, category: 'beer', name: 'Imperial Stout', description: 'Dark roasted cacao, espresso notes, oak finish', price: '$10.00', image: 'https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=600&auto=format&fit=crop&q=80' },
+                { id: 12, category: 'beer', name: 'German Pilsner', description: 'Crisp, refreshing, light floral hop aroma', price: '$7.50', image: 'https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=600&auto=format&fit=crop&q=80' },
+                { id: 13, category: 'beer', name: 'Craft Wheat Ale', description: 'Unfiltered citrus wheat, coriander notes, light bite', price: '$8.00', image: 'https://images.unsplash.com/photo-1600788886242-5c96aabe3757?w=600&auto=format&fit=crop&q=80' },
+                { id: 14, category: 'beer', name: 'Baltic Porter', description: 'Heavy dark malt, plum flavors, coffee undertones', price: '$9.50', image: 'https://images.unsplash.com/photo-1584225064785-c62a8b43d148?w=600&auto=format&fit=crop&q=80' },
+                { id: 15, category: 'beer', name: 'Dry Apple Cider', description: 'Crisp fermented local apples, medium dry balance', price: '$8.00', image: 'https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=600&auto=format&fit=crop&q=80' },
 
                 // Wine
-                { id: 11, category: 'wine', name: 'Armenian Reserve Red', description: 'Areni Noir, dark blackberry, smooth tannins', price: '$14.00', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&auto=format&fit=crop&q=80' },
-                { id: 12, category: 'wine', name: 'Bordeaux Red Blend', description: 'Cabernet blend, dark cherry, oak aged', price: '$18.00', image: 'https://images.unsplash.com/photo-1558001373-7b93ee48ffa0?w=600&auto=format&fit=crop&q=80' },
+                { id: 16, category: 'wine', name: 'Armenian Reserve Red', description: 'Areni Noir, dark blackberry, smooth tannins', price: '$14.00', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&auto=format&fit=crop&q=80' },
+                { id: 17, category: 'wine', name: 'Bordeaux Red Blend', description: 'Cabernet blend, dark cherry, oak aged', price: '$18.00', image: 'https://images.unsplash.com/photo-1558001373-7b93ee48ffa0?w=600&auto=format&fit=crop&q=80' },
+                { id: 18, category: 'wine', name: 'Crisp Chardonnay', description: 'Green apple, subtle oak, buttery clean finish', price: '$13.00', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&auto=format&fit=crop&q=80' },
+                { id: 19, category: 'wine', name: 'Italian Pinot Grigio', description: 'Light-bodied white, citrus notes, refreshing minerals', price: '$12.00', image: 'https://images.unsplash.com/photo-1569919659476-f0852f6834b7?w=600&auto=format&fit=crop&q=80' },
+                { id: 20, category: 'wine', name: 'Provencal Rosé', description: 'Delicate strawberry notes, watermelon hint, dry finish', price: '$13.50', image: 'https://images.unsplash.com/photo-1558001373-7b93ee48ffa0?w=600&auto=format&fit=crop&q=80' },
+                { id: 21, category: 'wine', name: 'Vintage Prosecco', description: 'Fine bubbles, white peach notes, crisp acidity', price: '$15.00', image: 'https://images.unsplash.com/photo-1592892111425-15e04305f961?w=600&auto=format&fit=crop&q=80' },
 
                 // Food
-                { id: 14, category: 'food', name: 'Prime Beef Burger', description: 'Aged cheddar, caramelized onion, truffle aioli, fries', price: '$18.00', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80' },
-                { id: 15, category: 'food', name: 'Truffle Fries', description: 'Hand-cut fries, truffle oil, grated parmesan', price: '$10.00', image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=80' },
-                { id: 16, category: 'food', name: 'Pub Charcuterie Board', description: 'Selection of cured meats, cheeses, nuts, and crackers', price: '$24.00', image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&auto=format&fit=crop&q=80' },
+                { id: 22, category: 'food', name: 'Prime Beef Burger', description: 'Aged cheddar, caramelized onion, truffle aioli, fries', price: '$18.00', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80' },
+                { id: 23, category: 'food', name: 'Truffle Fries', description: 'Hand-cut fries, truffle oil, grated parmesan', price: '$10.00', image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=80' },
+                { id: 24, category: 'food', name: 'Pub Charcuterie Board', description: 'Selection of cured meats, cheeses, nuts, and crackers', price: '$24.00', image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&auto=format&fit=crop&q=80' },
+                { id: 25, category: 'food', name: 'BBQ Beef Ribs', description: 'Slow-cooked tender beef ribs with signature bourbon sauce', price: '$26.00', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=600&auto=format&fit=crop&q=80' },
+                { id: 26, category: 'food', name: 'Spicy Beef Tacos', description: 'Three soft tacos, braised beef, guacamole, pico de gallo', price: '$16.00', image: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&auto=format&fit=crop&q=80' },
+                { id: 27, category: 'food', name: 'Crispy Buffalo Wings', description: 'Juicy wings tossed in spicy buffalo glaze, blue cheese dip', price: '$14.00', image: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=600&auto=format&fit=crop&q=80' },
+                { id: 28, category: 'food', name: 'New York Cheesecake', description: 'Classic creamy cheesecake with wild berry coulis', price: '$9.00', image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&auto=format&fit=crop&q=80' },
             ];
 
             const filteredItems = menuItems.filter(item => item.category === activeCategory);
@@ -416,6 +431,62 @@
             );
         };
 
+        // Interior Gallery Section
+        const InteriorGallery = () => {
+            const galleryImages = [
+                {
+                    title: "Main Bar & Counter",
+                    subtitle: "Handcrafted cocktails & rare spirits",
+                    image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Velvet Lounge Area",
+                    subtitle: "Comfortable & private seating",
+                    image: "https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Atmospheric Lighting",
+                    subtitle: "Subtle warmth for great evenings",
+                    image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Exclusive Reserve Shelf",
+                    subtitle: "Curated collection of aged whiskies",
+                    image: "https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=800&auto=format&fit=crop&q=80"
+                }
+            ];
+
+            return (
+                <section id="gallery" className="py-20 px-4 sm:px-6 lg:px-8 bg-noir">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-12">
+                            <span className="text-xs uppercase tracking-[0.25em] text-accent font-medium">The Atmosphere</span>
+                            <h2 className="font-display text-4xl font-bold text-cream mt-2">
+                                PUB INTERIOR
+                            </h2>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {galleryImages.map((item, idx) => (
+                                <div key={idx} className="group relative rounded-lg overflow-hidden border border-white/5 h-80">
+                                    <img 
+                                        src={item.image} 
+                                        alt={item.title} 
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/30 to-transparent opacity-90 transition-opacity duration-300" />
+                                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                                        <h3 className="font-display text-2xl font-semibold text-cream mb-1">{item.title}</h3>
+                                        <p className="text-xs text-accent font-light uppercase tracking-widest">{item.subtitle}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
         // Specials Section
         const SpecialsSection = () => {
             const specials = [
@@ -440,7 +511,7 @@
             ];
 
             return (
-                <section id="specials" className="py-20 px-4 sm:px-6 lg:px-8 bg-noir">
+                <section id="specials" className="py-20 px-4 sm:px-6 lg:px-8 bg-noir-card border-t border-white/5">
                     <div className="max-w-7xl mx-auto">
                         <div className="text-center mb-12">
                             <span className="text-xs uppercase tracking-[0.25em] text-accent font-medium">House Specials</span>
@@ -451,7 +522,7 @@
 
                         <div className="grid md:grid-cols-3 gap-6">
                             {specials.map((item, idx) => (
-                                <div key={idx} className="bg-noir-card rounded-lg overflow-hidden border border-white/5 p-6 flex flex-col justify-between">
+                                <div key={idx} className="bg-noir rounded-lg overflow-hidden border border-white/5 p-6 flex flex-col justify-between">
                                     <div>
                                         <div className="h-44 rounded overflow-hidden mb-4">
                                             <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
@@ -484,7 +555,7 @@
             };
 
             return (
-                <section id="reservation" className="py-20 px-4 sm:px-6 lg:px-8 bg-noir-card border-t border-white/5">
+                <section id="reservation" className="py-20 px-4 sm:px-6 lg:px-8 bg-noir border-t border-white/5">
                     <div className="max-w-2xl mx-auto text-center">
                         <span className="text-xs uppercase tracking-[0.25em] text-accent font-medium">Book a Table</span>
                         <h2 className="font-display text-4xl font-bold text-cream mt-2 mb-8">
@@ -497,7 +568,7 @@
                             </div>
                         )}
 
-                        <form onSubmit={handleSubmit} className="space-y-4 text-left bg-noir p-8 rounded-lg border border-white/5">
+                        <form onSubmit={handleSubmit} className="space-y-4 text-left bg-noir-card p-8 rounded-lg border border-white/5">
                             <div className="grid sm:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-[10px] uppercase tracking-widest text-cream/70 mb-1">Full Name</label>
@@ -507,7 +578,7 @@
                                         value={formData.name}
                                         onChange={(e) => setFormData({...formData, name: e.target.value})}
                                         placeholder="John Doe"
-                                        className="w-full bg-noir-card border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
+                                        className="w-full bg-noir border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
                                     />
                                 </div>
                                 <div>
@@ -518,7 +589,7 @@
                                         value={formData.phone}
                                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
                                         placeholder="+374 XX XXX XXX"
-                                        className="w-full bg-noir-card border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
+                                        className="w-full bg-noir border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
                                     />
                                 </div>
                             </div>
@@ -531,7 +602,7 @@
                                         required
                                         value={formData.date}
                                         onChange={(e) => setFormData({...formData, date: e.target.value})}
-                                        className="w-full bg-noir-card border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
+                                        className="w-full bg-noir border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
                                     />
                                 </div>
                                 <div>
@@ -540,7 +611,7 @@
                                         required
                                         value={formData.time}
                                         onChange={(e) => setFormData({...formData, time: e.target.value})}
-                                        className="w-full bg-noir-card border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
+                                        className="w-full bg-noir border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
                                     >
                                         <option value="">Select</option>
                                         <option value="18:00">6:00 PM</option>
@@ -558,7 +629,7 @@
                                         value={formData.guests}
                                         onChange={(e) => setFormData({...formData, guests: e.target.value})}
                                         placeholder="2"
-                                        className="w-full bg-noir-card border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
+                                        className="w-full bg-noir border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
                                     />
                                 </div>
                             </div>
@@ -575,18 +646,18 @@
         // Contact Section
         const ContactSection = () => {
             return (
-                <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8 bg-noir">
+                <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8 bg-noir-card border-t border-white/5">
                     <div className="max-w-7xl mx-auto">
                         <div className="grid md:grid-cols-3 gap-6 text-center">
-                            <div className="border border-white/5 p-6 rounded bg-noir-card">
+                            <div className="border border-white/5 p-6 rounded bg-noir">
                                 <div className="text-accent font-display text-lg font-bold mb-1">LOCATION</div>
                                 <p className="text-cream/70 text-xs leading-relaxed font-light">123 Mashtots Avenue<br />Yerevan, Armenia</p>
                             </div>
-                            <div className="border border-white/5 p-6 rounded bg-noir-card">
+                            <div className="border border-white/5 p-6 rounded bg-noir">
                                 <div className="text-accent font-display text-lg font-bold mb-1">HOURS</div>
                                 <p className="text-cream/70 text-xs leading-relaxed font-light">Mon - Sun: 5:00 PM - 2:00 AM</p>
                             </div>
-                            <div className="border border-white/5 p-6 rounded bg-noir-card">
+                            <div className="border border-white/5 p-6 rounded bg-noir">
                                 <div className="text-accent font-display text-lg font-bold mb-1">CONTACT</div>
                                 <p className="text-cream/70 text-xs leading-relaxed font-light">+374 10 123456<br />info@noirpub.am</p>
                             </div>
@@ -624,6 +695,7 @@
                     <HeroSection onReserveClick={handleReserveClick} />
                     <MenuSection />
                     <AboutSection />
+                    <InteriorGallery />
                     <SpecialsSection />
                     <ReservationSection />
                     <ContactSection />
