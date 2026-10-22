@@ -10,21 +10,20 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        noir: '#0B0B0C',
-                        burgundy: '#601124',
-                        'burgundy-light': '#8C1D38',
-                        cream: '#F4ECE1',
-                        gold: '#D4AF37',
-                        'gold-light': '#F3E5AB',
+                        noir: '#0D0D0E',
+                        'noir-card': '#141416',
+                        burgundy: '#721C32',
+                        'burgundy-dark': '#4A1020',
+                        cream: '#F5F0EA',
+                        accent: '#E2B874',
                     },
                     fontFamily: {
-                        cinzel: ['Cinzel', 'serif'],
                         display: ['Playfair Display', 'serif'],
                         sans: ['Montserrat', 'sans-serif'],
                     },
@@ -37,66 +36,56 @@
             scroll-behavior: smooth;
         }
         body {
-            background-color: #0B0B0C;
-            color: #F4ECE1;
+            background-color: #0D0D0E;
+            color: #F5F0EA;
             font-family: 'Montserrat', sans-serif;
         }
-        .text-gold-gradient {
-            background: linear-gradient(135deg, #FFF0C0 0%, #D4AF37 50%, #9A7B1C 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .border-gold-gradient {
-            border-image: linear-gradient(to right, #D4AF37, #601124) 1;
-        }
         .bg-glass {
-            background: rgba(11, 11, 12, 0.75);
-            backdrop-filter: blur(12px);
+            background: rgba(13, 13, 14, 0.85);
+            backdrop-filter: blur(16px);
         }
         .menu-card {
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.35s ease;
         }
         .menu-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(96, 17, 36, 0.4);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(114, 28, 50, 0.25);
         }
         .menu-card:hover .card-img {
-            transform: scale(1.08);
+            transform: scale(1.06);
         }
-        .btn-gold {
-            background: linear-gradient(135deg, #D4AF37 0%, #AA820A 100%);
-            color: #0B0B0C;
+        .btn-primary {
+            background-color: #721C32;
+            color: #F5F0EA;
             transition: all 0.3s ease;
         }
-        .btn-gold:hover {
-            background: linear-gradient(135deg, #EAD175 0%, #D4AF37 100%);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        .btn-primary:hover {
+            background-color: #8C223E;
+            box-shadow: 0 0 20px rgba(114, 28, 50, 0.4);
             transform: translateY(-2px);
         }
-        .btn-burgundy {
-            background: linear-gradient(135deg, #7A142D 0%, #480A18 100%);
-            color: #F4ECE1;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+        .btn-secondary {
+            border: 1px solid rgba(245, 240, 234, 0.25);
+            color: #F5F0EA;
             transition: all 0.3s ease;
         }
-        .btn-burgundy:hover {
-            background: linear-gradient(135deg, #961C39 0%, #601124 100%);
-            border-color: #D4AF37;
-            box-shadow: 0 0 20px rgba(122, 20, 45, 0.5);
+        .btn-secondary:hover {
+            border-color: #E2B874;
+            color: #E2B874;
             transform: translateY(-2px);
         }
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #0B0B0C;
+            background: #0D0D0E;
         }
         ::-webkit-scrollbar-thumb {
-            background: #601124;
+            background: #721C32;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #D4AF37;
+            background: #E2B874;
         }
     </style>
 </head>
@@ -113,7 +102,7 @@
 
             useEffect(() => {
                 const handleScroll = () => {
-                    setScrolled(window.scrollY > 50);
+                    setScrolled(window.scrollY > 40);
                 };
                 window.addEventListener('scroll', handleScroll);
                 return () => window.removeEventListener('scroll', handleScroll);
@@ -128,23 +117,20 @@
             ];
 
             return (
-                <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-                    scrolled ? 'bg-glass border-b border-gold/20 py-3' : 'bg-transparent py-6'
+                <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+                    scrolled ? 'bg-glass border-b border-white/5 py-4' : 'bg-transparent py-6'
                 }`}>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex justify-between items-center">
                             
-                            {/* Premium Logo Header */}
+                            {/* Modern Logo Header */}
                             <a href="#home" className="flex items-center gap-3 group">
-                                <div className="w-10 h-10 border border-gold/60 rotate-45 flex items-center justify-center transition-transform duration-500 group-hover:rotate-180 bg-burgundy/30">
-                                    <span className="-rotate-45 text-gold font-cinzel text-lg font-bold">N</span>
+                                <div className="w-9 h-9 rounded-full bg-burgundy/40 border border-burgundy flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                                    <span className="text-cream font-display text-lg font-bold">N</span>
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="font-cinzel text-2xl font-black tracking-[0.25em] text-gold-gradient leading-none">
-                                        NOIR
-                                    </span>
-                                    <span className="text-[9px] tracking-[0.4em] text-cream/60 uppercase font-light mt-1">
-                                        Cocktail Lounge
+                                    <span className="font-display text-2xl font-bold tracking-widest text-cream">
+                                        NOIR PUB
                                     </span>
                                 </div>
                             </a>
@@ -155,14 +141,14 @@
                                     <a
                                         key={link.href}
                                         href={link.href}
-                                        className="text-sm uppercase tracking-[0.2em] text-cream/80 hover:text-gold transition-colors duration-300 font-medium"
+                                        className="text-xs uppercase tracking-[0.2em] text-cream/70 hover:text-cream transition-colors duration-300 font-medium"
                                     >
                                         {link.label}
                                     </a>
                                 ))}
                                 <button
                                     onClick={onReserveClick}
-                                    className="btn-gold px-6 py-2.5 rounded-none font-semibold text-xs tracking-[0.2em] uppercase"
+                                    className="btn-primary px-6 py-2.5 rounded text-xs font-semibold tracking-widest uppercase"
                                 >
                                     Reserve Table
                                 </button>
@@ -172,7 +158,7 @@
                             <div className="md:hidden">
                                 <button
                                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                    className="text-gold p-2 focus:outline-none"
+                                    className="text-cream p-2 focus:outline-none"
                                 >
                                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         {isMenuOpen ? (
@@ -187,13 +173,13 @@
 
                         {/* Mobile Menu */}
                         {isMenuOpen && (
-                            <div className="md:hidden bg-noir/95 border-b border-gold/20 mt-4 p-6 space-y-4">
+                            <div className="md:hidden bg-noir border-b border-white/10 mt-4 p-6 space-y-4">
                                 {navLinks.map((link) => (
                                     <a
                                         key={link.href}
                                         href={link.href}
                                         onClick={() => setIsMenuOpen(false)}
-                                        className="block text-sm uppercase tracking-widest text-cream/80 hover:text-gold py-2"
+                                        className="block text-xs uppercase tracking-widest text-cream/80 hover:text-accent py-2"
                                     >
                                         {link.label}
                                     </a>
@@ -203,7 +189,7 @@
                                         onReserveClick();
                                         setIsMenuOpen(false);
                                     }}
-                                    className="w-full btn-gold py-3 font-semibold text-xs tracking-widest uppercase mt-4"
+                                    className="w-full btn-primary py-3 rounded font-semibold text-xs tracking-widest uppercase mt-4"
                                 >
                                     Reserve Table
                                 </button>
@@ -214,66 +200,65 @@
             );
         };
 
-        // Premium Hero Section
+        // Hero Section
         const HeroSection = ({ onReserveClick }) => {
             return (
                 <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-                    <div className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105 transition-transform duration-10000"
+                    <div className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
                         style={{
                             backgroundImage: 'url("https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1600&auto=format&fit=crop&q=80")',
                         }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/80 to-noir/60" />
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(96,17,36,0.35)_0%,transparent_70%)]" />
 
-                    <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12">
+                    <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-12">
                         
-                        <div className="inline-flex items-center gap-3 px-4 py-1.5 border border-gold/30 bg-noir/60 backdrop-blur-md mb-8">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse"></span>
-                            <span className="text-xs uppercase tracking-[0.3em] text-gold font-medium">Elegance in Every Sip</span>
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-burgundy/30 border border-burgundy/50 backdrop-blur-md mb-8">
+                            <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                            <span className="text-xs uppercase tracking-[0.25em] text-cream/90 font-medium">Good Drinks • Great Nights</span>
                         </div>
 
-                        <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-normal tracking-wide text-cream mb-6 leading-[1.15]">
-                            ELEVATED DRINKS.<br />
-                            <span className="font-serif italic text-gold-gradient font-light">UNFORGETTABLE</span> NIGHTS.
+                        <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-cream mb-6 leading-tight">
+                            GOOD DRINKS.<br />
+                            <span className="italic font-serif font-normal text-accent">GREAT NIGHTS.</span>
                         </h1>
 
-                        <p className="text-base sm:text-xl text-cream/70 max-w-2xl mx-auto mb-10 font-light tracking-wide leading-relaxed">
-                            An exclusive haven of artisanal mixology, rare vintages, and refined culinary pairings in an atmosphere of darkened luxury.
+                        <p className="text-base sm:text-lg text-cream/70 max-w-2xl mx-auto mb-10 font-light tracking-wide leading-relaxed">
+                            Craft cocktails, bold flavors, rare draft beers, and unforgettable evenings in an intimate pub atmosphere.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                             <a
                                 href="#menu"
-                                className="btn-burgundy px-9 py-4 font-semibold text-xs tracking-[0.25em] uppercase w-full sm:w-auto"
+                                className="btn-primary px-8 py-3.5 rounded font-semibold text-xs tracking-[0.2em] uppercase w-full sm:w-auto"
                             >
                                 Explore Menu
                             </a>
                             <button
                                 onClick={onReserveClick}
-                                className="btn-gold px-9 py-4 font-semibold text-xs tracking-[0.25em] uppercase w-full sm:w-auto"
+                                className="btn-secondary px-8 py-3.5 rounded font-semibold text-xs tracking-[0.2em] uppercase w-full sm:w-auto"
                             >
-                                Book a Table
+                                Reserve a Table
                             </button>
                         </div>
 
                         {/* Stats Bar */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-10 border-t border-gold/15 max-w-4xl mx-auto">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-8 border-t border-white/10 max-w-3xl mx-auto">
                             <div>
-                                <p className="font-cinzel text-3xl font-bold text-gold">40+</p>
-                                <p className="text-[11px] uppercase tracking-widest text-cream/50 mt-1">Craft Cocktails</p>
+                                <p className="font-display text-3xl font-bold text-accent">40+</p>
+                                <p className="text-[10px] uppercase tracking-widest text-cream/50 mt-1">Drinks & Food</p>
                             </div>
                             <div>
-                                <p className="font-cinzel text-3xl font-bold text-gold">100%</p>
-                                <p className="text-[11px] uppercase tracking-widest text-cream/50 mt-1">Premium Spirits</p>
+                                <p className="font-display text-3xl font-bold text-accent">100%</p>
+                                <p className="text-[10px] uppercase tracking-widest text-cream/50 mt-1">Quality Spirits</p>
                             </div>
                             <div>
-                                <p className="font-cinzel text-3xl font-bold text-gold">4.9 ★</p>
-                                <p className="text-[11px] uppercase tracking-widest text-cream/50 mt-1">Guest Rating</p>
+                                <p className="font-display text-3xl font-bold text-accent">4.9 ★</p>
+                                <p className="text-[10px] uppercase tracking-widest text-cream/50 mt-1">Customer Rating</p>
                             </div>
                             <div>
-                                <p className="font-cinzel text-3xl font-bold text-gold">7 Days</p>
-                                <p className="text-[11px] uppercase tracking-widest text-cream/50 mt-1">Nightly Service</p>
+                                <p className="font-display text-3xl font-bold text-accent">7 Days</p>
+                                <p className="text-[10px] uppercase tracking-widest text-cream/50 mt-1">Open Nightly</p>
                             </div>
                         </div>
 
@@ -290,60 +275,56 @@
                 { id: 'cocktails', label: 'Cocktails' },
                 { id: 'beer', label: 'Craft Beer' },
                 { id: 'wine', label: 'Fine Wine' },
-                { id: 'food', label: 'Gourmet Food' },
+                { id: 'food', label: 'Food & Bites' },
             ];
 
             const menuItems = [
                 // Cocktails
-                { id: 1, category: 'cocktails', name: 'Espresso Martini', description: 'Rich double espresso, Belvedere vodka, Kahlúa, Madagascar vanilla', price: '$14.00', image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&auto=format&fit=crop&q=80' },
-                { id: 2, category: 'cocktails', name: 'Smoked Old Fashioned', description: 'Woodford Reserve bourbon, Angostura, orange peel, hickory smoke infusion', price: '$16.00', image: 'https://images.unsplash.com/photo-1470338745628-171cf53de4a8?w=600&auto=format&fit=crop&q=80' },
-                { id: 3, category: 'cocktails', name: 'Venetian Aperol Spritz', description: 'Aperol liqueur, organic Prosecco, soda, dehydrated orange', price: '$12.00', image: 'https://images.unsplash.com/photo-1560512823-829485b8bf24?w=600&auto=format&fit=crop&q=80' },
-                { id: 4, category: 'cocktails', name: 'Cuban Mint Mojito', description: 'Aged white rum, fresh garden mint, lime juice, sparkling water', price: '$13.00', image: 'https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=600&auto=format&fit=crop&q=80' },
-                { id: 5, category: 'cocktails', name: 'Smoky Mezcal Paloma', description: 'Artisanal Mezcal, fresh grapefruit juice, lime, agave, smoked sea salt rim', price: '$15.00', image: 'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=600&auto=format&fit=crop&q=80' },
-                { id: 6, category: 'cocktails', name: 'Classic Gin Negroni', description: 'Hendrick\'s Gin, Campari, Sweet Vermouth, expressed orange oils', price: '$14.50', image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&auto=format&fit=crop&q=80' },
+                { id: 1, category: 'cocktails', name: 'Espresso Martini', description: 'Double espresso, vodka, Kahlúa, vanilla syrup', price: '$14.00', image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&auto=format&fit=crop&q=80' },
+                { id: 2, category: 'cocktails', name: 'Smoked Old Fashioned', description: 'Aged bourbon, bitters, orange peel, oak smoke', price: '$16.00', image: 'https://images.unsplash.com/photo-1514361892635-6b07e31e75f9?w=600&auto=format&fit=crop&q=80' },
+                { id: 3, category: 'cocktails', name: 'Aperol Spritz', description: 'Aperol, Prosecco, soda, fresh orange slice', price: '$12.00', image: 'https://images.unsplash.com/photo-1560512823-829485b8bf24?w=600&auto=format&fit=crop&q=80' },
+                { id: 4, category: 'cocktails', name: 'Classic Mojito', description: 'White rum, fresh mint, lime, sparkling water', price: '$13.00', image: 'https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=600&auto=format&fit=crop&q=80' },
+                { id: 5, category: 'cocktails', name: 'Smoky Mezcal Paloma', description: 'Mezcal, fresh grapefruit juice, lime, sea salt rim', price: '$15.00', image: 'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=600&auto=format&fit=crop&q=80' },
+                { id: 6, category: 'cocktails', name: 'Classic Negroni', description: 'Dry gin, Campari, Sweet Vermouth, orange peel', price: '$14.50', image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&auto=format&fit=crop&q=80' },
 
                 // Beer
-                { id: 7, category: 'beer', name: 'Hazy IPA', description: 'Citra & Mosaic hops, tropical fruit notes, velvety mouthfeel', price: '$8.50', image: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600&auto=format&fit=crop&q=80' },
-                { id: 8, category: 'beer', name: 'Belgian Dark Ale', description: 'Complex malt caramel sweetness, dried plum, subtle spice', price: '$9.00', image: 'https://images.unsplash.com/photo-1608270586620-248524c67de9?w=600&auto=format&fit=crop&q=80' },
-                { id: 9, category: 'beer', name: 'Imperial Stout', description: 'Dark roasted cacao, espresso notes, creamy oak finish', price: '$10.00', image: 'https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=600&auto=format&fit=crop&q=80' },
-                { id: 10, category: 'beer', name: 'Crisp German Pilsner', description: 'Clean, herbal hop bitterness, light malt profile', price: '$7.50', image: 'https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=600&auto=format&fit=crop&q=80' },
+                { id: 7, category: 'beer', name: 'Hazy IPA', description: 'Citra hops, tropical fruit notes, smooth finish', price: '$8.50', image: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600&auto=format&fit=crop&q=80' },
+                { id: 8, category: 'beer', name: 'Belgian Dark Ale', description: 'Caramel malt sweetness, dried fruit, subtle spice', price: '$9.00', image: 'https://images.unsplash.com/photo-1608270586620-248524c67de9?w=600&auto=format&fit=crop&q=80' },
+                { id: 9, category: 'beer', name: 'Imperial Stout', description: 'Dark roasted cacao, espresso notes, oak finish', price: '$10.00', image: 'https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=600&auto=format&fit=crop&q=80' },
 
                 // Wine
-                { id: 11, category: 'wine', name: 'Armenian Reserve Red', description: 'Areni Noir grape, blackberry notes, refined oak tannin blend', price: '$14.00', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&auto=format&fit=crop&q=80' },
-                { id: 12, category: 'wine', name: 'Bordeaux Grand Cru', description: 'Full-bodied Cabernet blend, dark cherries, cedar, long finish', price: '$18.00', image: 'https://images.unsplash.com/photo-1558001373-7b93ee48ffa0?w=600&auto=format&fit=crop&q=80' },
-                { id: 13, category: 'wine', name: 'Chardonnay Blanc', description: 'Crisp green apple, citrus, subtle toasted butter notes', price: '$13.00', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&auto=format&fit=crop&q=80' },
+                { id: 11, category: 'wine', name: 'Armenian Reserve Red', description: 'Areni Noir, dark blackberry, smooth tannins', price: '$14.00', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&auto=format&fit=crop&q=80' },
+                { id: 12, category: 'wine', name: 'Bordeaux Red Blend', description: 'Cabernet blend, dark cherry, oak aged', price: '$18.00', image: 'https://images.unsplash.com/photo-1558001373-7b93ee48ffa0?w=600&auto=format&fit=crop&q=80' },
 
                 // Food
-                { id: 14, category: 'food', name: 'Prime Angus Burger', description: 'Aged cheddar, caramelized onion jam, truffle aioli, brioche bun', price: '$18.00', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80' },
-                { id: 15, category: 'food', name: 'Truffle Parmesan Fries', description: 'Hand-cut potatoes, black truffle oil, freshly shaved parmesan', price: '$10.00', image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=80' },
-                { id: 16, category: 'food', name: 'Artisan Charcuterie', description: 'Cured meats, imported cheeses, fig jam, artisan crackers', price: '$24.00', image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&auto=format&fit=crop&q=80' },
-                { id: 17, category: 'food', name: 'Crispy Calamari', description: 'Wild-caught squid, lemon-herb dip, spicy marinara', price: '$15.00', image: 'https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=600&auto=format&fit=crop&q=80' },
+                { id: 14, category: 'food', name: 'Prime Beef Burger', description: 'Aged cheddar, caramelized onion, truffle aioli, fries', price: '$18.00', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80' },
+                { id: 15, category: 'food', name: 'Truffle Fries', description: 'Hand-cut fries, truffle oil, grated parmesan', price: '$10.00', image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=80' },
+                { id: 16, category: 'food', name: 'Pub Charcuterie Board', description: 'Selection of cured meats, cheeses, nuts, and crackers', price: '$24.00', image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&auto=format&fit=crop&q=80' },
             ];
 
             const filteredItems = menuItems.filter(item => item.category === activeCategory);
 
             return (
-                <section id="menu" className="py-24 px-4 sm:px-6 lg:px-8 bg-noir relative">
+                <section id="menu" className="py-20 px-4 sm:px-6 lg:px-8 bg-noir">
                     <div className="max-w-7xl mx-auto">
                         
-                        <div className="text-center mb-16">
-                            <span className="text-xs uppercase tracking-[0.3em] text-gold font-medium">Curated Selection</span>
-                            <h2 className="font-display text-4xl sm:text-5xl font-semibold text-cream mt-2">
+                        <div className="text-center mb-12">
+                            <span className="text-xs uppercase tracking-[0.25em] text-accent font-medium">Selected Flavors</span>
+                            <h2 className="font-display text-4xl font-bold text-cream mt-2">
                                 OUR MENU
                             </h2>
-                            <div className="w-16 h-0.5 bg-gold/40 mx-auto mt-4"></div>
                         </div>
 
                         {/* Category Selector */}
-                        <div className="flex flex-wrap justify-center gap-3 mb-16">
+                        <div className="flex flex-wrap justify-center gap-2 mb-12">
                             {categories.map((category) => (
                                 <button
                                     key={category.id}
                                     onClick={() => setActiveCategory(category.id)}
-                                    className={`px-8 py-3 text-xs uppercase tracking-[0.2em] transition-all duration-300 font-medium ${
+                                    className={`px-6 py-2.5 text-xs uppercase tracking-widest rounded transition-all duration-200 font-medium ${
                                         activeCategory === category.id
-                                            ? 'btn-burgundy text-cream border-gold'
-                                            : 'bg-noir border border-gold/20 text-cream/60 hover:text-gold hover:border-gold/40'
+                                            ? 'bg-burgundy text-cream'
+                                            : 'bg-noir-card text-cream/60 hover:text-cream hover:bg-white/5'
                                     }`}
                                 >
                                     {category.label}
@@ -352,27 +333,26 @@
                         </div>
 
                         {/* Menu Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {filteredItems.map((item) => (
                                 <div
                                     key={item.id}
-                                    className="menu-card bg-noir border border-gold/15 overflow-hidden group flex flex-col justify-between"
+                                    className="menu-card bg-noir-card rounded-lg overflow-hidden border border-white/5 group flex flex-col justify-between"
                                 >
                                     <div>
-                                        <div className="h-64 overflow-hidden relative">
+                                        <div className="h-56 overflow-hidden relative">
                                             <img
                                                 src={item.image}
                                                 alt={item.name}
-                                                className="card-img w-full h-full object-cover transition-transform duration-700"
+                                                className="card-img w-full h-full object-cover transition-transform duration-500"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-noir via-transparent to-transparent opacity-80" />
                                         </div>
                                         <div className="p-6">
                                             <div className="flex justify-between items-start mb-2">
-                                                <h3 className="font-display text-xl font-semibold text-cream group-hover:text-gold transition-colors">
+                                                <h3 className="font-display text-xl font-semibold text-cream">
                                                     {item.name}
                                                 </h3>
-                                                <span className="font-cinzel text-lg font-bold text-gold ml-2">
+                                                <span className="font-display text-lg font-bold text-accent ml-2">
                                                     {item.price}
                                                 </span>
                                             </div>
@@ -380,10 +360,6 @@
                                                 {item.description}
                                             </p>
                                         </div>
-                                    </div>
-                                    <div className="px-6 pb-6 pt-2 border-t border-gold/10 flex justify-between items-center text-[11px] text-cream/40 uppercase tracking-widest">
-                                        <span>Crafted Daily</span>
-                                        <span className="text-gold/60">Noir Signature</span>
                                     </div>
                                 </div>
                             ))}
@@ -397,44 +373,41 @@
         // About Section
         const AboutSection = () => {
             return (
-                <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-noir via-burgundy/10 to-noir border-y border-gold/15">
+                <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-noir-card border-y border-white/5">
                     <div className="max-w-7xl mx-auto">
-                        <div className="grid lg:grid-cols-2 gap-16 items-center">
+                        <div className="grid lg:grid-cols-2 gap-12 items-center">
                             
                             <div>
-                                <span className="text-xs uppercase tracking-[0.3em] text-gold font-medium">Atmosphere & Spirit</span>
-                                <h2 className="font-display text-4xl sm:text-5xl font-semibold text-cream mt-2 mb-8 leading-tight">
-                                    WHERE DISCRETION MEETS DISTILLATION
+                                <span className="text-xs uppercase tracking-[0.25em] text-accent font-medium">About NOIR</span>
+                                <h2 className="font-display text-3xl sm:text-4xl font-bold text-cream mt-2 mb-6">
+                                    MORE THAN JUST A PUB
                                 </h2>
                                 
-                                <p className="text-cream/70 text-sm leading-relaxed mb-6 font-light">
-                                    Founded with a passion for nocturnal luxury, NOIR PUB reimagines the classic cocktail experience. We blend dark aesthetic design with warm hospitality, creating an sanctuary for those who appreciate fine spirits and deeper conversations.
+                                <p className="text-cream/70 text-sm leading-relaxed mb-4 font-light">
+                                    At NOIR PUB, we believe in creating moments that matter. Our carefully crafted cocktails, curated draft beer selection, and warm atmosphere come together to offer a place where great conversations flow as freely as our drinks.
                                 </p>
-                                <p className="text-cream/70 text-sm leading-relaxed mb-8 font-light">
-                                    Every cocktail is treated as a piece of art—from hand-carved ice spheres to house-infused syrups and rare botanicals sourced globally.
+                                <p className="text-cream/70 text-sm leading-relaxed mb-6 font-light">
+                                    Whether you're celebrating with friends or enjoying a quiet evening, our team ensures every visit is memorable.
                                 </p>
 
-                                <div className="grid grid-cols-2 gap-6 pt-6 border-t border-gold/20">
+                                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
                                     <div>
-                                        <p className="font-cinzel text-lg font-bold text-gold">Master Mixologists</p>
-                                        <p className="text-xs text-cream/50 mt-1">International experience & passion</p>
+                                        <p className="font-display text-base font-semibold text-accent">Expert Mixologists</p>
+                                        <p className="text-xs text-cream/50 mt-0.5">Passion in every pour</p>
                                     </div>
                                     <div>
-                                        <p className="font-cinzel text-lg font-bold text-gold">Intimate Setting</p>
-                                        <p className="text-xs text-cream/50 mt-1">Soft lighting & velvet seating</p>
+                                        <p className="font-display text-base font-semibold text-accent">Warm Atmosphere</p>
+                                        <p className="text-xs text-cream/50 mt-0.5">Cozy & modern design</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="relative">
-                                <div className="relative z-10 border border-gold/30 p-2 bg-noir">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&auto=format&fit=crop&q=80"
-                                        alt="Noir Bar Interior"
-                                        className="w-full h-[500px] object-cover"
-                                    />
-                                </div>
-                                <div className="absolute -top-6 -left-6 w-full h-full border border-burgundy/60 z-0 hidden sm:block"></div>
+                            <div>
+                                <img
+                                    src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&auto=format&fit=crop&q=80"
+                                    alt="Noir Pub Interior"
+                                    className="w-full h-[400px] object-cover rounded-lg border border-white/10"
+                                />
                             </div>
 
                         </div>
@@ -448,48 +421,47 @@
             const specials = [
                 {
                     name: 'NOIR Velvet Reserve',
-                    description: 'Aged cognac, dark cacao liqueur, maraschino, and a drop of orange bitters, served with gold leaf garnish.',
+                    description: 'Aged cognac, dark cacao liqueur, maraschino cherry, orange bitters.',
                     price: '$22.00',
                     image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&auto=format&fit=crop&q=80'
                 },
                 {
                     name: 'Midnight Elixir',
-                    description: 'Blackberry infused gin, wild elderflower, lemon juice, topped with champagne and fresh thyme infusion.',
+                    description: 'Blackberry gin, wild elderflower, lemon juice, prosecco splash.',
                     price: '$19.00',
                     image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&auto=format&fit=crop&q=80'
                 },
                 {
-                    name: 'Golden Hour Aged Whiskey',
-                    description: 'Small-batch Japanese whiskey, honey-ginger syrup, fresh lemon, served over hand-cut crystal ice.',
+                    name: 'Golden Hour Whiskey',
+                    description: 'Japanese whiskey, honey-ginger syrup, fresh lemon, crystal ice block.',
                     price: '$25.00',
                     image: 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=600&auto=format&fit=crop&q=80'
                 },
             ];
 
             return (
-                <section id="specials" className="py-24 px-4 sm:px-6 lg:px-8 bg-noir">
+                <section id="specials" className="py-20 px-4 sm:px-6 lg:px-8 bg-noir">
                     <div className="max-w-7xl mx-auto">
-                        <div className="text-center mb-16">
-                            <span className="text-xs uppercase tracking-[0.3em] text-gold font-medium">Limited & Rare</span>
-                            <h2 className="font-display text-4xl sm:text-5xl font-semibold text-cream mt-2">
-                                SIGNATURE CREATIONS
+                        <div className="text-center mb-12">
+                            <span className="text-xs uppercase tracking-[0.25em] text-accent font-medium">House Specials</span>
+                            <h2 className="font-display text-4xl font-bold text-cream mt-2">
+                                SIGNATURE SPECIALS
                             </h2>
-                            <div className="w-16 h-0.5 bg-gold/40 mx-auto mt-4"></div>
                         </div>
 
-                        <div className="grid md:grid-cols-3 gap-8">
+                        <div className="grid md:grid-cols-3 gap-6">
                             {specials.map((item, idx) => (
-                                <div key={idx} className="border border-gold/20 bg-burgundy/10 p-8 flex flex-col justify-between hover:border-gold/50 transition-colors">
+                                <div key={idx} className="bg-noir-card rounded-lg overflow-hidden border border-white/5 p-6 flex flex-col justify-between">
                                     <div>
-                                        <div className="h-48 overflow-hidden mb-6 border border-gold/10">
-                                            <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                                        <div className="h-44 rounded overflow-hidden mb-4">
+                                            <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                         </div>
-                                        <h3 className="font-display text-2xl font-semibold text-gold mb-3">{item.name}</h3>
-                                        <p className="text-cream/70 text-xs leading-relaxed font-light mb-6">{item.description}</p>
+                                        <h3 className="font-display text-xl font-semibold text-accent mb-2">{item.name}</h3>
+                                        <p className="text-cream/70 text-xs leading-relaxed font-light mb-4">{item.description}</p>
                                     </div>
-                                    <div className="flex justify-between items-center pt-4 border-t border-gold/15">
-                                        <span className="text-xs uppercase tracking-widest text-cream/50">Exclusive</span>
-                                        <span className="font-cinzel text-xl font-bold text-gold">{item.price}</span>
+                                    <div className="flex justify-between items-center pt-3 border-t border-white/10">
+                                        <span className="text-xs uppercase tracking-widest text-cream/40">Exclusive</span>
+                                        <span className="font-display text-lg font-bold text-accent">{item.price}</span>
                                     </div>
                                 </div>
                             ))}
@@ -512,74 +484,72 @@
             };
 
             return (
-                <section id="reservation" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-t from-noir via-burgundy/20 to-noir border-t border-gold/20">
-                    <div className="max-w-3xl mx-auto text-center">
-                        <span className="text-xs uppercase tracking-[0.3em] text-gold font-medium">Reserve Your Place</span>
-                        <h2 className="font-display text-4xl sm:text-5xl font-semibold text-cream mt-2 mb-4">
-                            TABLE RESERVATION
+                <section id="reservation" className="py-20 px-4 sm:px-6 lg:px-8 bg-noir-card border-t border-white/5">
+                    <div className="max-w-2xl mx-auto text-center">
+                        <span className="text-xs uppercase tracking-[0.25em] text-accent font-medium">Book a Table</span>
+                        <h2 className="font-display text-4xl font-bold text-cream mt-2 mb-8">
+                            RESERVE A TABLE
                         </h2>
-                        <p className="text-cream/60 text-xs tracking-widest uppercase mb-12">Reservations recommended for weekend evenings</p>
 
                         {submitted && (
-                            <div className="p-4 mb-8 bg-gold/20 border border-gold text-gold text-xs uppercase tracking-widest">
-                                Reservation Request Received. We will confirm via SMS shortly.
+                            <div className="p-4 mb-6 bg-burgundy/40 border border-burgundy rounded text-cream text-xs uppercase tracking-widest">
+                                Reservation Request Received! We will contact you shortly.
                             </div>
                         )}
 
-                        <form onSubmit={handleSubmit} className="space-y-6 text-left border border-gold/20 p-8 sm:p-12 bg-noir/80 backdrop-blur-md">
-                            <div className="grid sm:grid-cols-2 gap-6">
+                        <form onSubmit={handleSubmit} className="space-y-4 text-left bg-noir p-8 rounded-lg border border-white/5">
+                            <div className="grid sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-[11px] uppercase tracking-widest text-gold mb-2">Full Name</label>
+                                    <label className="block text-[10px] uppercase tracking-widest text-cream/70 mb-1">Full Name</label>
                                     <input
                                         type="text"
                                         required
                                         value={formData.name}
                                         onChange={(e) => setFormData({...formData, name: e.target.value})}
-                                        placeholder="Alexander Wright"
-                                        className="w-full bg-noir border border-gold/20 p-3 text-cream text-sm focus:border-gold outline-none"
+                                        placeholder="John Doe"
+                                        className="w-full bg-noir-card border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-[11px] uppercase tracking-widest text-gold mb-2">Phone Number</label>
+                                    <label className="block text-[10px] uppercase tracking-widest text-cream/70 mb-1">Phone Number</label>
                                     <input
                                         type="tel"
                                         required
                                         value={formData.phone}
                                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                                        placeholder="+1 (555) 000-0000"
-                                        className="w-full bg-noir border border-gold/20 p-3 text-cream text-sm focus:border-gold outline-none"
+                                        placeholder="+374 XX XXX XXX"
+                                        className="w-full bg-noir-card border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
                                     />
                                 </div>
                             </div>
 
-                            <div className="grid sm:grid-cols-3 gap-6">
+                            <div className="grid sm:grid-cols-3 gap-4">
                                 <div>
-                                    <label className="block text-[11px] uppercase tracking-widest text-gold mb-2">Date</label>
+                                    <label className="block text-[10px] uppercase tracking-widest text-cream/70 mb-1">Date</label>
                                     <input
                                         type="date"
                                         required
                                         value={formData.date}
                                         onChange={(e) => setFormData({...formData, date: e.target.value})}
-                                        className="w-full bg-noir border border-gold/20 p-3 text-cream text-sm focus:border-gold outline-none"
+                                        className="w-full bg-noir-card border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-[11px] uppercase tracking-widest text-gold mb-2">Time</label>
+                                    <label className="block text-[10px] uppercase tracking-widest text-cream/70 mb-1">Time</label>
                                     <select
                                         required
                                         value={formData.time}
                                         onChange={(e) => setFormData({...formData, time: e.target.value})}
-                                        className="w-full bg-noir border border-gold/20 p-3 text-cream text-sm focus:border-gold outline-none"
+                                        className="w-full bg-noir-card border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
                                     >
-                                        <option value="">Select Time</option>
+                                        <option value="">Select</option>
                                         <option value="18:00">6:00 PM</option>
                                         <option value="20:00">8:00 PM</option>
                                         <option value="22:00">10:00 PM</option>
-                                        <option value="00:00">12:00 AM</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-[11px] uppercase tracking-widest text-gold mb-2">Guests</label>
+                                    <label className="block text-[10px] uppercase tracking-widest text-cream/70 mb-1">Guests</label>
                                     <input
                                         type="number"
                                         min="1"
@@ -588,12 +558,12 @@
                                         value={formData.guests}
                                         onChange={(e) => setFormData({...formData, guests: e.target.value})}
                                         placeholder="2"
-                                        className="w-full bg-noir border border-gold/20 p-3 text-cream text-sm focus:border-gold outline-none"
+                                        className="w-full bg-noir-card border border-white/10 rounded p-3 text-cream text-sm focus:border-burgundy outline-none"
                                     />
                                 </div>
                             </div>
 
-                            <button type="submit" className="w-full btn-gold py-4 font-bold text-xs tracking-[0.25em] uppercase mt-4">
+                            <button type="submit" className="w-full btn-primary py-3.5 rounded font-bold text-xs tracking-[0.2em] uppercase mt-2">
                                 Confirm Reservation
                             </button>
                         </form>
@@ -605,20 +575,20 @@
         // Contact Section
         const ContactSection = () => {
             return (
-                <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 bg-noir border-t border-gold/15">
+                <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8 bg-noir">
                     <div className="max-w-7xl mx-auto">
-                        <div className="grid md:grid-cols-3 gap-8 text-center">
-                            <div className="border border-gold/15 p-8 bg-burgundy/5">
-                                <div className="text-gold font-cinzel text-xl font-bold mb-2">LOCATION</div>
-                                <p className="text-cream/70 text-xs leading-relaxed font-light">458 Northern Avenue<br />Downtown District, City</p>
+                        <div className="grid md:grid-cols-3 gap-6 text-center">
+                            <div className="border border-white/5 p-6 rounded bg-noir-card">
+                                <div className="text-accent font-display text-lg font-bold mb-1">LOCATION</div>
+                                <p className="text-cream/70 text-xs leading-relaxed font-light">123 Mashtots Avenue<br />Yerevan, Armenia</p>
                             </div>
-                            <div className="border border-gold/15 p-8 bg-burgundy/5">
-                                <div className="text-gold font-cinzel text-xl font-bold mb-2">HOURS</div>
-                                <p className="text-cream/70 text-xs leading-relaxed font-light">Mon - Sun: 5:00 PM - 3:00 AM<br />Kitchen Open Until 1:30 AM</p>
+                            <div className="border border-white/5 p-6 rounded bg-noir-card">
+                                <div className="text-accent font-display text-lg font-bold mb-1">HOURS</div>
+                                <p className="text-cream/70 text-xs leading-relaxed font-light">Mon - Sun: 5:00 PM - 2:00 AM</p>
                             </div>
-                            <div className="border border-gold/15 p-8 bg-burgundy/5">
-                                <div className="text-gold font-cinzel text-xl font-bold mb-2">CONTACT</div>
-                                <p className="text-cream/70 text-xs leading-relaxed font-light">+1 (800) 555-NOIR<br />concierge@noirpub.com</p>
+                            <div className="border border-white/5 p-6 rounded bg-noir-card">
+                                <div className="text-accent font-display text-lg font-bold mb-1">CONTACT</div>
+                                <p className="text-cream/70 text-xs leading-relaxed font-light">+374 10 123456<br />info@noirpub.am</p>
                             </div>
                         </div>
                     </div>
@@ -629,11 +599,11 @@
         // Footer Component
         const Footer = () => {
             return (
-                <footer className="bg-noir border-t border-gold/20 py-12 px-4 text-center text-cream/40 text-xs tracking-widest uppercase">
-                    <div className="max-w-7xl mx-auto space-y-4">
-                        <p className="font-cinzel text-xl font-bold text-gold tracking-[0.3em]">NOIR PUB</p>
-                        <p className="text-[10px] text-cream/50">Elevated Drinks • Great Nights • Luxury Atmosphere</p>
-                        <p className="pt-4 border-t border-gold/10 text-[9px]">&copy; {new Date().getFullYear()} NOIR PUB. All Rights Reserved.</p>
+                <footer className="bg-noir border-t border-white/5 py-8 px-4 text-center text-cream/40 text-xs tracking-widest uppercase">
+                    <div className="max-w-7xl mx-auto space-y-2">
+                        <p className="font-display text-lg font-bold text-cream">NOIR PUB</p>
+                        <p className="text-[10px] text-cream/50">Good Drinks • Great Nights</p>
+                        <p className="pt-2 text-[9px]">&copy; {new Date().getFullYear()} NOIR PUB. All Rights Reserved.</p>
                     </div>
                 </footer>
             );
